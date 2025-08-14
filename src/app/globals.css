@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ===== CSS tuỳ biến giống bản PHP ===== */
+:root{
+  --bg-dark:#0b0d12; --bg-light:#ffffff;
+  --text-dark:#e5e7eb; --text-light:#0f172a;
+  --bar-dark:#1f2937;  --bar-light:#ffffff;
+  --bar-border-dark:rgba(255,255,255,.08); --bar-border-light:rgba(0,0,0,.08);
 }
+body.theme-dark{ background-color:var(--bg-dark); color:var(--text-dark); }
+body.theme-light{ background-color:var(--bg-light); color:var(--text-light); }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.appbar{ position:fixed; top:0; left:0; right:0; z-index:40; border-bottom:1px solid; }
+body.theme-dark  .appbar{ background:var(--bar-dark);  border-color:var(--bar-border-dark);  box-shadow:0 2px 14px rgba(0,0,0,.35); }
+body.theme-light .appbar{ background:var(--bar-light); border-color:var(--bar-border-light); box-shadow:0 2px 14px rgba(0,0,0,.08); }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+.navlink{ font-weight:600; padding:.5rem .75rem; border-radius:.5rem; transition:background .2s, color .2s; }
+body.theme-dark  .navlink{ color:#c4b5fd; }  body.theme-dark  .navlink:hover{ background:rgba(139,92,246,.15); }
+body.theme-light .navlink{ color:#4f46e5; }  body.theme-light .navlink:hover{ background:rgba(99,102,241,.12); }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.nav-sep{ width:1px; height:24px; }
+body.theme-dark .nav-sep{ background:rgba(255,255,255,.14) }
+body.theme-light .nav-sep{ background:rgba(0,0,0,.16) }
+
+.btn-soft{ border-radius:.5rem; padding:.5rem .75rem; }
+body.theme-dark .btn-soft{ background:rgba(255,255,255,.08); color:var(--text-dark) }
+body.theme-light .btn-soft{ background:rgba(0,0,0,.06); color:var(--text-light) }
+
+.btn-outline{ border:1px solid; border-radius:.5rem; padding:.5rem .75rem; }
+body.theme-dark .btn-outline{ border-color:rgba(255,255,255,.2); color:var(--text-dark) }
+body.theme-light .btn-outline{ border-color:rgba(0,0,0,.2); color:var(--text-light) }
+
+.btn-primary{ border-radius:.5rem; padding:.5rem .75rem; color:#fff; background:#7c3aed; }
+.btn-primary:hover{ background:#6d28d9; }
+
+.glow{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:560px; height:560px; border-radius:40px;
+  background:radial-gradient(circle,rgba(139,92,246,.55),transparent 70%);
+  filter:blur(80px); pointer-events:none; }
+.ring-1{ box-shadow:inset 0 0 0 1px rgba(255,255,255,.1); }
+body.theme-light .ring-1{ box-shadow:inset 0 0 0 1px rgba(0,0,0,.08); }
+
+body.theme-light .text-white\/80{ color:#1f2937 !important }
+body.theme-light .text-white\/70{ color:#374151 !important }
+body.theme-light .text-white\/50{ color:#6b7280 !important }
+body.theme-light .bg-white\/5   { background:rgba(0,0,0,.03) !important }
+body.theme-light .hover\:bg-white\/10:hover{ background:rgba(0,0,0,.06) !important }
+body.theme-light .border-white\/20{ border-color:rgba(0,0,0,.16) !important }
+
+/* Carousel */
+.carousel-btn{ position:absolute; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:9999px;
+  display:flex; align-items:center; justify-content:center; border:1px solid; cursor:pointer; user-select:none;
+  transition:background .2s, opacity .2s, border-color .2s; }
+body.theme-dark .carousel-btn{ background:rgba(255,255,255,.08); border-color:rgba(255,255,255,.18); color:#e5e7eb; }
+body.theme-light .carousel-btn{ background:rgba(0,0,0,.06);   border-color:rgba(0,0,0,.18);   color:#111827; }
+.carousel-btn:hover{ opacity:.9 } .carousel-btn:active{ transform:translateY(-50%) scale(.97) }
+.carousel-btn.left{ left:10px } .carousel-btn.right{ right:10px }
+
+.dots{ position:absolute; left:50%; bottom:12px; transform:translateX(-50%);
+  display:flex; gap:8px; padding:6px 10px; border-radius:9999px; border:1px solid; backdrop-filter: blur(6px); }
+body.theme-dark .dots{ background:rgba(15,23,42,.45); border-color:rgba(255,255,255,.16) }
+body.theme-light .dots{ background:rgba(255,255,255,.7); border-color:rgba(0,0,0,.12) }
+.dot{ width:9px; height:9px; border-radius:9999px; opacity:.45; transition:opacity .2s, transform .2s, width .2s; background: currentColor; }
+body.theme-dark .dot{ color:#c4b5fd }  body.theme-light .dot{ color:#4f46e5 }
+.dot.active{ opacity:1; transform:scale(1.1); width:18px; border-radius:9999px; }
